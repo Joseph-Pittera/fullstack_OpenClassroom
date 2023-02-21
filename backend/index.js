@@ -2,19 +2,10 @@ const express = require('express');
 const app = express();
 const productRouter = require('./app/routers/productRouter');
 const userRouter = require('./app/routers/userRouter');
-const mongoose = require('mongoose');
+const mongooseConnexion = require('./models/connexion');
 require('dotenv').config();
 
 app.use(express.json());
-
-// paramétrage de mongoose, package qui facilite les interactions avec MongoDB
-mongoose
-  .connect(process.env.MONGO_SRV, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
 
 // paramétrage du CORS
 app.use((req, res, next) => {
@@ -33,5 +24,7 @@ app.use((req, res, next) => {
 app.use('/api/stuff', productRouter);
 app.use('/api/auth', userRouter);
 app.use('/images', express.static('./images'));
+
+mongooseConnexion();
 
 module.exports = app;
