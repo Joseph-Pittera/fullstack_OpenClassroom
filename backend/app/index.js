@@ -1,8 +1,20 @@
 const express = require("express");
 const app = express();
 const router = require("./router");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+dotenv.config();
 
 app.use(express.json());
+
+// paramétrage de mongoose, package qui facilite les interactions avec MongoDB
+mongoose
+  .connect(process.env.MONGO_SRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connexion à MongoDB réussie !"))
+  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 // paramétrage du CORS
 app.use((req, res, next) => {
@@ -18,6 +30,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(router);
+app.use("/api/stuff", router);
 
 module.exports = app;
