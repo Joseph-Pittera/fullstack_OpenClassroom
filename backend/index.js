@@ -1,10 +1,20 @@
 const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();
+const mongoose = require("mongoose");
 
 const app = express();
 
 const router = require("./app/router"); // Path relative to current file
+
+// paramétrage de mongoose, package qui facilite les interactions avec MongoDB
+mongoose
+  .connect(process.env.MONGO_SRV, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("Connexion à MongoDB réussie !"))
+  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 app.use(express.json()); // To be able to read POST req.body content
 

@@ -1,14 +1,4 @@
-const mongoose = require("mongoose");
 const Product = require("../models/product");
-
-// paramétrage de mongoose, package qui facilite les interactions avec MongoDB
-mongoose
-  .connect(
-    "mongodb+srv://test:test@cluster0.i3j1vxj.mongodb.net/?retryWrites=true&w=majority",
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
 
 const mainController = {
   getAll: async (req, res, next) => {
