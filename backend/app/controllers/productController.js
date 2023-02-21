@@ -1,6 +1,6 @@
-const Thing = require("../models/thing");
+const Thing = require("../../models/thing");
 
-const mainController = {
+const productController = {
   postStuff: async (req, res, next) => {
     delete req.body._id;
     const thing = new Thing({ ...req.body });
@@ -36,4 +36,4 @@ const mainController = {
   },
 };
 
-module.exports = mainController;
+module.exports = productController;

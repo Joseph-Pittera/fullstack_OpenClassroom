@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
-const router = require("./router");
+const productRouter = require("./routers/productRouter");
+const userRouter = require("./routers/userRouter");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -30,6 +31,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/stuff", router);
+app.use("/api/stuff", productRouter);
+app.use("/api/auth", userRouter);
 
 module.exports = app;
